@@ -4,14 +4,14 @@ import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     final String user = "postgres";
-    final String password = "postgres";
+    final String password = "0414";
     final String url = "jdbc:postgresql://localhost:5432/skypro";
 
     @Override
     public void createEmloyee() {
         try (final Connection connection =
                      DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO employee (first_name, last_name, gender, age, citi_id) VALUES ('Василий', 'Васильев', 'муж', 65, 4)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO employee (first_name, last_name, gender, age, city_id) VALUES ('Василий', 'Васильев', 'муж', 65, 4)");
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -25,7 +25,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         try (final Connection connection =
                      DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement =
-                    connection.prepareStatement("SELECT * FROM employee FULL JOIN citi ON employee.citi_id = citi.citi_id WHERE id =" + id);
+                    connection.prepareStatement("SELECT * FROM employee FULL JOIN city ON employee.city_id = city.city_id WHERE id =" + id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             int id_employee = resultSet.getInt("id");
@@ -33,10 +33,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             String last_name = resultSet.getString("last_name");
             String gender = resultSet.getString("gender");
             int age = resultSet.getInt("age");
-            int citi_id = resultSet.getInt("citi_id");
-            String citi_name = resultSet.getString("citi_name");
+            int city_id = resultSet.getInt("city_id");
+            String city_name = resultSet.getString("city_name");
 
-            return new Employee(id_employee, first_name, last_name, gender, age, citi_id, citi_name);
+            return new Employee(id_employee, first_name, last_name, gender, age, city_id, city_name);
 
         } catch (SQLException e) {
             System.out.println("Ошибка при подключении к базе данных!");
@@ -61,9 +61,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 String last_name = resultSet.getString("last_name");
                 String gender = resultSet.getString("gender");
                 int age = resultSet.getInt("age");
-                int citi_id = resultSet.getInt("citi_id");
-                String citi_name = resultSet.getString("citi_name");
-                employees.add(new Employee(id_employee, first_name, last_name, gender, age, citi_id, citi_name));
+                int city_id = resultSet.getInt("city_id");
+                String city_name = resultSet.getString("city_name");
+                employees.add(new Employee(id_employee, first_name, last_name, gender, age, city_id, city_name));
             }
 
         } catch (SQLException e) {

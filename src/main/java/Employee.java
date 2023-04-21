@@ -4,17 +4,17 @@ public class Employee {
     private String last_name;
     private String gender;
     private int age;
-    private int citi_id;
-    private String citi_name;
+    private int city_id;
+    private String city_name;
 
-    public Employee(int id, String first_name, String last_name, String gender, int age, int citi_id, String citi_name) {
+    public Employee(int id, String first_name, String last_name, String gender, int age, int city_id, String city_name) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.age = age;
-        this.citi_id = citi_id;
-        this.citi_name = citi_name;
+        this.city_id = city_id;
+        this.city_name = city_name;
     }
 
     public int getId() {
@@ -57,20 +57,20 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCiti_id() {
-        return citi_id;
+    public int getCity_id() {
+        return city_id;
     }
 
-    public void setCiti_id(int citi_id) {
-        this.citi_id = citi_id;
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
     }
 
-    public String getCiti_name() {
-        return citi_name;
+    public String getCity_name() {
+        return city_name;
     }
 
-    public void setCiti_name(String citi_name) {
-        this.citi_name = citi_name;
+    public void setCity_name(String city_name) {
+        this.city_name = city_name;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Employee {
                 ", last_name='" + last_name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
-                ", citi_name=" + citi_name +
+                ", city_name=" + city_name +
                 '}';
     }
 }
