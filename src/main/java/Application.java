@@ -18,7 +18,7 @@ public class Application {
              // Создаем объект PreparedStatement с SQL-запросом
              // для выборки всех записей из таблицы employee
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM employee FULL JOIN citi ON employee.citi_id = citi.citi_id")) {
+                     connection.prepareStatement("SELECT * FROM employee FULL JOIN city ON employee.city_id = city.city_id")) {
 
             // Выполняем SQL-запрос
             // и получаем результаты в виде объекта ResultSet
@@ -34,7 +34,7 @@ public class Application {
                 String last_nameOFEmployee = resultSet.getString("last_name");
                 String genderOFEmployee = resultSet.getString("gender");
                 int ageOFEmployee = resultSet.getInt("age");
-                String citi_name = resultSet.getString("citi_name");
+                String citi_name = resultSet.getString("city_name");
 
                 System.out.println("Фамилия: " + first_nameOFEmployee);
                 System.out.println("Имя: " + last_nameOFEmployee);
