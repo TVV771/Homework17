@@ -70,5 +70,7 @@ public class EmployeeDao {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
         statement.executeUpdate();
+
+
     }
 }
