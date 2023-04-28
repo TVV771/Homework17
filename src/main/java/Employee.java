@@ -1,24 +1,32 @@
-import java.sql.*;
+import javax.persistence.*;
 
-import java.util.List;
-
+@Entity
+@Table(name = "employee")
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String first_Name;
-    private String last_Name;
-    private String gender;
-    private int age;
 
-    public Employee(int id, String first_Name, String last_Name, String gender, int age) {
-        this.id = id;
-        this.first_Name = first_Name;
-        this.last_Name = last_Name;
-        this.gender = gender;
-        this.age = age;
-    }
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "gender")
+    private String gender;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "citi_id")
+    private int citiId;
 
     public Employee() {
+    }
 
+    public Employee(String first_name, String last_name, String gender, int age, int citi_id) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.gender = gender;
+        this.age = age;
+        this.citiId = citi_id;
     }
 
     public int getId() {
@@ -29,20 +37,20 @@ public class Employee {
         this.id = id;
     }
 
-    public String getFirst_Name() {
-        return first_Name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_Name(String first_Name) {
-        this.first_Name = first_Name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public String getLast_Name() {
-        return last_Name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_Name(String last_Name) {
-        this.last_Name = last_Name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
     public String getGender() {
@@ -60,40 +68,24 @@ public class Employee {
     public void setAge(int age) {
         this.age = age;
     }
-    public static void main(String[] args) throws SQLException {
-        // Создаем объект EmployeeDao
 
-        EmployeeDao employeeDao = new EmployeeDao();
+    public int getCitiId() {
+        return citiId;
+    }
 
-        // Создаем новый объект Employee и добавляем его в базу данных
-        Employee newEmployee = new Employee(1, "Маркевич", "Марина", "gerl", 23);
-        employeeDao.addEmployee(newEmployee);
-
-        // Получаем объект Employee из базы данных по его id
-        Employee employee = employeeDao.getEmployeeById(1);
-        System.out.println("ID человека " + employee.getId() + " поиск: " + employee.getFirst_Name() + " " + employee.getLast_Name() + ", " + employee.getGender() + ", " + employee.getAge());
-
-        // Получаем список всех объектов Employee из базы данных
-        List<Employee> employees = employeeDao.getAllEmployees();
-        System.out.println("Все люди:");
-        for (Employee e : employees) {
-            System.out.println(e.getFirst_Name() + " " + e.getLast_Name() + ", " + e.getGender() + ", " + e.getAge());
-        }
-
-        // Изменяем объект Employee в базе данных
-        Employee updatedEmployee = new Employee(1, "Маркевич", "Марина", "gerl", 23);
-        employeeDao.updateEmployee(updatedEmployee);
-        employee = employeeDao.getEmployeeById(1);
-        System.out.println("ID человека " + employee.getId() + " обновить: " + employee.getFirst_Name() + " " + employee.getLast_Name() + ", " + employee.getGender() + ", " + employee.getAge());
-
-        // Удаляем объект Employee из базы данных
-        employeeDao.deleteEmployeeById(1);
-        employee = employeeDao.getEmployeeById(1);
-        System.out.println("ID человека " + employee.getId() + " удалить");
+    public void setCitiId(int citi_id) {
+        this.citiId = citi_id;
     }
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", first_name='" + firstName + '\'' +
+                ", last_name='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
