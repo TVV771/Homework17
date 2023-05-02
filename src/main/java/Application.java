@@ -1,23 +1,37 @@
-import java.sql.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 
 public class Application {
+
     public static void main(String[] args) {
-        EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
+        EntityManager entityManager = createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
 
-        Employee employee1 = new Employee("Артур", "Арарат", "муж", 70, 4);
-        Employee employee2 = new Employee("Михаил", "Скоробогатый", "муж", 20, 3);
 
-        employeeDAO.getAllEmployee();
 
-        employeeDAO.createEmployee(employee1);
 
-        employeeDAO.getEmployeeById(3);
 
-        employeeDAO.updateEmployee(employee2, 7);
+        City city1 = entityManager.find(City.class, 3);
+        System.out.println(city1.getEmployee());
 
-        employeeDAO.deleteEmployee(3);
+        entityManager.remove(city1);
+
+
+        System.out.println();
+        entityManager.flush();
+
+
+
+        transaction.commit();
+        entityManager.close();
     }
 
-
+    static EntityManager createEntityManager() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
+        return entityManagerFactory.createEntityManager();
+    }
 }
